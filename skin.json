@@ -1,0 +1,36 @@
+{
+    "name": "ESkin",
+    "author": "ESports One",
+    "descriptionmsg": "eskin-desc",
+    "namemsg": "skinname-eskin",
+    "type": "skin",
+    "ValidSkinNames": {
+            "eskin": "ESkin"
+    },
+        "AutoloadClasses": {
+            "SkinESkin": "ESkin.skin.php"
+    },
+        "MessageDirs": {
+            "ESkin": "i18n"
+    },
+        "ResourceModules": {
+            "skins.eskin": {
+                "styles": {
+                    "resources/screen.css": {"media": "screen" },
+                    "resources/print.css": {"media": "print" }
+                }
+            }
+        },
+        "ResourceFileModulePaths": {
+            "localBasePath": "",
+            "remoteSkinPath": "ESkin"
+            },
+        "skins.eskin.js": {
+            "scripts": [
+                "cool.js",
+                "awesome.js"
+            ],
+            "position": "top",
+            "dependencies": "jquery.ui.dialog"
+        }
+}

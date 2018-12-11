@@ -1,36 +1,211 @@
 {
     "name": "ESkin",
+    "version": "0.1",
     "author": "ESports One",
-    "descriptionmsg": "eskin-desc",
+    "url": "https://esportspedia.com",
+    "descriptionmsg": "eskin-skin-desc",
     "namemsg": "skinname-eskin",
     "type": "skin",
+    "requires": {
+        "MediaWiki": ">= 1.29.0"
+    },
+    "ConfigRegistry": {
+		"eskin": "GlobalVarConfig::newInstance"
+	},
     "ValidSkinNames": {
             "eskin": "ESkin"
     },
-        "AutoloadClasses": {
-            "SkinESkin": "ESkin.skin.php"
+    "MessageDirs": {
+        "ESkin": ["i18n" ]
     },
-        "MessageDirs": {
-            "ESkin": "i18n"
-    },
-        "ResourceModules": {
-            "skins.eskin": {
-                "styles": {
-                    "resources/screen.css": {"media": "screen" },
-                    "resources/print.css": {"media": "print" }
-                }
-            }
-        },
-        "ResourceFileModulePaths": {
-            "localBasePath": "",
-            "remoteSkinPath": "ESkin"
-            },
-        "skins.eskin.js": {
-            "scripts": [
-                "cool.js",
-                "awesome.js"
-            ],
-            "position": "top",
-            "dependencies": "jquery.ui.dialog"
-        }
+    "ExtensionMessagesFiles": {
+		"ESkinMagic": "ESkin.i18n.magic.php"
+	},"AutoloadClasses": {
+		"ESkinHooks": "includes/Hooks.php",
+		"SkinESkin": "includes/SkinESkin.php",
+		"ESkinTemplate": "includes/ESkinTemplate.php"
+	},
+	"Hooks": {
+		"GetPreferences": "ESkinHooks::onGetPreferences",
+		"ParserFirstCallInit": "ESkinHooks::onParserFirstCallInit",
+		"SkinEditSectionLinks": "ESkinHooks::onSkinEditSectionLinks",
+		"AfterFinalPageOutput": "ESkinHooks::onAfterFinalPageOutput",
+		"MagicWordMagicWords": "ESkinHooks::onMagicWordMagicWords",
+		"MagicWordwgVariableIDs": "ESkinHooks::onMagicWordwgVariableIDs",
+		"InternalParseBeforeLinks": "ESkinHooks::onInternalParseBeforeLinks"
+	},
+	"ResourceModules": {
+		"skins.eskin.bootstrap.styles": {
+			"position": "top",
+			"styles": "bootstrap/css/bootstrap.min.css"
+		},
+		"skins.eskin.styles": {
+			"position": "top",
+			"styles": {
+				"screen.less": {
+					"media": "screen"
+				},
+				"print.less": {
+					"media": "print"
+				},
+				"mediawiki/content.css": {
+					"media": "screen"
+				},
+				"mediawiki/elements.css": {
+					"media": "screen"
+				},
+				"mediawiki/interface.css": {
+					"media": "screen"
+				}
+			}
+		},
+		"skins.eskin.externallinks.styles": {
+			"position": "top",
+			"styles": {
+				"components/externallinks.less": {
+					"media": "screen"
+				}
+			}
+		},
+		"skins.eskin.corrections.styles": {
+			"position": "top",
+			"styles": {
+				"components/corrections.less": {
+					"media": "screen"
+				}
+			}
+		},
+		"skins.eskin.awesome.styles": {
+			"position": "top",
+			"styles": {
+				"awesome/css/font-awesome.min.css": []
+			}
+		},
+		"skins.eskin.bootstraptheme.styles": {
+			"position": "top",
+			"styles": {
+				"bootstrap/css/bootstrap-theme.min.css": {
+					"media": "screen"
+				},
+				"components/corrections-theme.less": {
+					"media": "screen"
+				}
+			}
+		},
+		"skins.eskin.cookiewarning.styles": {
+			"position": "top",
+			"styles": {
+				"components/cookiewarning.less": {
+					"media": "screen"
+				}
+			}
+		},
+		"skins.eskin.bootstrap.scripts": {
+			"position": "bottom",
+			"scripts": [
+				"bootstrap/js/bootstrap.min.js"
+			],
+			"dependencies": [
+				"mediawiki.jqueryMsg"
+			]
+		},
+		"skins.eskin.scripts": {
+			"position": "bottom",
+			"scripts": [
+				"eskin.js"
+			],
+			"dependencies": [
+				"skins.eskin.bootstrap.scripts"
+			],
+			"messages": [
+				"eskin-toc-top"
+			]
+		},
+		"skins.eskin.tooltips": {
+			"position": "bottom",
+			"scripts": [
+				"eskin-tooltips-setup.js"
+			],
+			"dependencies": [
+				"skins.eskin.scripts"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "ESkin"
+	},
+	"config": {
+		"ESkinSkinHideAll": {
+			"footer-info": true
+		},
+		"ESkinSkinHideable": [
+			"firstHeading"
+		],
+		"ESkinSkinHideAnon": {
+			"subnav": true,
+			"PERSONAL": true,
+			"TOOLBOX" : true
+		},
+		"ESkinSkinHideLoggedin": {
+			"footer-custom": true
+		},
+		"ESkinSkinHideNonAdvanced": {
+			"EDIT-EXT-special": true
+		},
+		"ESkinSkinFooterIcons": false,
+		"ESkinSkinPageRenderer": "self::renderPage",
+		"ESkinSkinNavigationalElements": [],
+		"ESkinSkinSpecialElements": {
+			"FIRSTHEADING": "self::renderFirstHeading",
+			"TOC": "self::renderTOC",
+			"SEARCH": "self::renderSearch",
+			"LOGO": "self::renderLogo",
+			"LOGIN-EXT": "self::renderLoginExt",
+			"FOOTER": "self::renderStandardFooter"
+		},
+		"ESkinSkinStyles": [
+			"skins.eskin.bootstrap.styles",
+			"skins.eskin.styles",
+			"skins.eskin.corrections.styles",
+			"skins.eskin.externallinks.styles"
+		],
+		"ESkinSkinUseAwesome": true,
+		"ESkinSkinUseBootstrapTheme": true,
+		"ESkinSkinUseBtnParser": true,
+		"ESkinSkinUseScrollSpy": true,
+		"ESkinSkinUseTooltips": false,
+		"ESkinSkinUseIconWatch": false,
+		"ESkinSkinCustomEditSectionLink": true,
+		"ESkinSkinCustomCSS": [],
+		"ESkinSkinCustomizedBootstrap": null,
+		"ESkinSkinImagePageTOCTabs": false,
+		"ESkinSkinGridNone": { 
+			"mainoffset": 1, 
+			"mainwidth": 10 
+		},
+		"ESkinSkinGridLeft": { 
+			"leftoffset": 0, 
+			"leftwidth": 3, 
+			"mainoffset": 0, 
+			"mainwidth": 9 
+		},
+		"ESkinSkinGridRight": { 
+			"mainoffset": 0, 
+			"mainwidth": 9, 
+			"rightoffset": 0, 
+			"rightwidth": 3
+		},
+		"ESkinSkinGridBoth": {
+			"leftoffset": 0, 
+			"leftwidth": 2, 
+			"mainoffset": 0, 
+			"mainwidth": 8, 
+			"rightoffset": 0, 
+			"rightwidth": 2
+		},
+		"ESkinSkinAdditionalBodyClasses": []
+	},
+	"callback": "ESkinHooks::onRegistration",
+	"manifest_version": 1
 }
